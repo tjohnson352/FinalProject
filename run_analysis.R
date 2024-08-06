@@ -88,14 +88,14 @@ colnames(test_data) <- new_column_names
 
 # Ensure the first two columns are text labels
 train_data[, 1] <- as.character(train_data[, 1])
-train_data[, 2] <- as.character(train_data[, 2])
+train_data[, 3] <- as.character(train_data[, 3])
 
 test_data[, 1] <- as.character(test_data[, 1])
-test_data[, 2] <- as.character(test_data[, 2])
+test_data[, 3] <- as.character(test_data[, 3])
 
 # Ensure all other columns are numeric
-train_data[, -c(1, 2)] <- lapply(train_data[, -c(1, 2)], as.numeric)
-test_data[, -c(1, 2)] <- lapply(test_data[, -c(1, 2)], as.numeric)
+train_data[, -c(1, 3)] <- lapply(train_data[, -c(1, 3)], as.numeric)
+test_data[, -c(1, 3)] <- lapply(test_data[, -c(1, 3)], as.numeric)
 
 # Add a new column to identify the data source
 train_data$source <- "train"
@@ -123,7 +123,7 @@ summary_feature <- combined_data %>%
 # Summarize mean for each variable by subject and activity
 summary_means <- combined_data %>%
   group_by(subject, activity) %>%
-  summarise(across(body_acc_x:total_acc_z, mean, .names = "mean_{col}"))
+  summarise(across(feature:total_acc_z, mean, .names = "mean_{col}"))
 
 # Pivot longer to create tidy data with columns: subject, activity, mean
 tidy_data <- summary_means %>%
