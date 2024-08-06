@@ -130,3 +130,7 @@ tidy_data <- summary_means %>%
   pivot_longer(cols = starts_with("mean_"), names_to = "variable", values_to = "mean") %>%
   select(subject, activity, variable, mean)
 
+write.table(tidy_data, file = "tidy_data.txt", row.names = FALSE)
+View(tidy_data)
+View(summary_means)
+View(combined_data)
